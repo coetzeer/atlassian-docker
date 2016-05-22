@@ -5,13 +5,13 @@ if [ "$(docker run busybox echo 'test')" != "test" ]; then
     exit 1
   fi
 fi
-$SUDO docker pull zaiste/postgresql
-$SUDO docker run -d --name postgres -p=5432:5432 zaiste/postgresql
+$SUDO docker build -t durdn/atlassian-postgres postgres
+$SUDO docker run -d --name postgres -p=5432:5432 durdn/atlassian-postgres
 
 $SUDO docker build -t durdn/atlassian-base base
 
 cd "$(dirname $0)"
-cat initialise_db.sh | $SUDO docker run --rm -i --link postgres:db zaiste/postgresql bash -
+cat initialise_db.sh | $SUDO docker run --rm -i --link postgres:db postgres bash -
 
 $SUDO docker build -t durdn/stash stash
 STASH_VERSION="$($SUDO docker run --rm durdn/stash sh -c 'echo $STASH_VERSION')"

@@ -1,6 +1,6 @@
 #!/bin/bash
 set -o errexit
-
+set -x
 . /usr/local/share/atlassian/common.bash
 
 sudo own-volume
@@ -33,4 +33,4 @@ EOF
 
 fi
 
-/opt/stash/bin/start-stash.sh -fg
+/opt/stash/bin/catalina.sh run
