@@ -1,12 +1,12 @@
 # Basics
 #
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER Nicola Paolucci <npaolucci@atlassian.com>
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -q -y git-core curl sudo xmlstarlet \
   software-properties-common python-software-properties
 
-# Install Java 7
+# Install Java 8
 
 RUN DEBIAN_FRONTEND=noninteractive apt-add-repository ppa:webupd8team/java -y
 RUN apt-get update
