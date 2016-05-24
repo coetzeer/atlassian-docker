@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/coetzeer/atlassian-docker.svg?branch=master)](https://travis-ci.org/coetzeer/atlassian-docker)
+
 ## Disclaimer
 
 **Note: This project is unmaintained and possibly outdated. You can skim
