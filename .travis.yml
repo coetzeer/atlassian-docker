@@ -1,0 +1,23 @@
+
+---
+sudo: required
+
+env:
+  - app: stash
+    port: 7999
+  - app: jira
+    port: 8080
+  - app: crowd
+    port: 8095
+
+services:
+  - docker
+
+before_install:
+  # initialize postgres
+  - 'cd postgres && sudo ./build.sh'
+
+script:
+  - 'cd ${app} && sudo ./build.sh'
+  # Run container in detached state.
+  - 'curl localhost:${port}'

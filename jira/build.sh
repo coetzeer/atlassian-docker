@@ -17,5 +17,5 @@ JIRA_RUNNING=`$SUDO docker ps | grep durdn/jira | wc -l`
 
 if [ $JIRA_RUNNING -eq 0 ]; then
   test  `docker ps -a | grep durdn/jira | wc -l` -ne 0  && docker rm jira
-  $SUDO docker run -d --name jira --link postgres:db --link stash:stash -p 8080:8080 durdn/jira
+  $SUDO docker run -d --name jira --link postgres:db  -p 8080:8080 durdn/jira
 fi
