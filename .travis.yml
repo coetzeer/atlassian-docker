@@ -21,10 +21,10 @@ before_install:
   #remove exited containers
   - docker ps -a | grep Exited | awk '{print $1}' | while read w; do docker rm $w; done
   # initialize postgres
-  - 'cd postgres && sudo ./build.sh'
+  - './postgres/build.sh'
 
 script:
-  - 'sudo bash ${app}/build.sh'
+  - './${app}/build.sh'
   # Run container in detached state.
   - 'curl localhost:${port}'
 
