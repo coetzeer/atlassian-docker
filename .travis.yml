@@ -14,6 +14,12 @@ services:
   - docker
 
 before_install:
+  # stop postgres
+  - docker ps | grep postgres | awk '{print $1}' | while read w; do docker stop $w; done
+  # stop the app if it's still running
+  - docker ps | grep ${app} | awk '{print $1}' | while read w; do docker stop $w; done
+  #remove exited containers
+  - docker ps -a | grep Exited | awk '{print $1}' | while read w; do docker rm $w; done
   # initialize postgres
   - 'cd postgres && sudo ./build.sh'
 
@@ -21,3 +27,9 @@ script:
   - 'sudo ./${app}/build.sh'
   # Run container in detached state.
   - 'curl localhost:${port}'
+
+after_script:
+  # stop everything
+  - docker ps | awk '{print $1}' | while read w; do docker stop $w; done
+  # remove dead containers
+  - docker ps -a | grep Exited | awk '{print $1}' | while read w; do docker rm $w; done
