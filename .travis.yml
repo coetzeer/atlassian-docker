@@ -18,6 +18,6 @@ before_install:
   - 'cd postgres && sudo ./build.sh'
 
 script:
-  - 'cd ${app} && sudo ./build.sh'
+  - 'sudo ./${app}/build.sh'
   # Run container in detached state.
   - 'curl localhost:${port}'
