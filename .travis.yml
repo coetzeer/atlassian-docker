@@ -4,7 +4,7 @@ sudo: required
 
 env:
   - app: stash
-    port: 7999
+    port: 7990
   - app: jira
     port: 8080
   - app: crowd
@@ -26,7 +26,7 @@ before_install:
 script:
   - './${app}/build.sh'
   # Run container in detached state.
-  - 'for i in {1..20}; do set +e; curl localhost:${port}; if [ $? -eq 0 ];then break; else test $i -eq 20 && echo "Failed to connect." && exit 2; fi ; sleep 5; done'
+  - 'for i in {1..20}; do set +e; curl localhost:${port}; if [ $? -eq 0 ];then echo "${app} is up" && break; else test $i -eq 20 && echo "Failed to connect." && exit 2; fi ; sleep 5; done'
 
 after_script:
   # stop everything
