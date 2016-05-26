@@ -4,7 +4,7 @@ set -o errexit
 . /usr/local/share/atlassian/common.bash
 
 sudo own-volume
-rm -f /opt/atlassian-home/.jira-home.lock
+rm -f /opt/atlassian-home/.confluence-home.lock
 
 if [ "$CONTEXT_PATH" == "ROOT" -o -z "$CONTEXT_PATH" ]; then
   CONTEXT_PATH=
@@ -15,7 +15,7 @@ fi
 xmlstarlet ed -u '//Context/@path' -v "$CONTEXT_PATH" conf/server-backup.xml > conf/server.xml
 
 if [ -n "$DATABASE_URL" ]; then
-  extract_database_url "$DATABASE_URL" DB /opt/jira/lib
+  extract_database_url "$DATABASE_URL" DB /opt/confluence/lib
   DB_JDBC_URL="$(xmlstarlet esc "$DB_JDBC_URL")"
   SCHEMA=''
   if [ "$DB_TYPE" != "mysql" ]; then
@@ -45,4 +45,4 @@ if [ -n "$DATABASE_URL" ]; then
 END
 fi
 
-/opt/jira/bin/start-jira.sh -fg
+/opt/confluence/bin/start-confluence.sh -fg

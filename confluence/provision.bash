@@ -1,11 +1,11 @@
 #!/bin/bash
 set -ex
 
-curl -Lks https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-software-${JIRA_VERSION}-jira-${JIRA_VERSION}.tar.gz -o /root/jira.tar.gz
-/usr/sbin/useradd --create-home --home-dir /opt/jira --groups atlassian --shell /bin/bash jira
-tar zxf /root/jira.tar.gz --strip=1 -C /opt/jira
-rm /root/jira.tar.gz
-chown -R jira:jira /opt/atlassian-home
-echo "jira.home = /opt/atlassian-home" > /opt/jira/atlassian-jira/WEB-INF/classes/jira-application.properties
-chown -R jira:jira /opt/jira
-mv /opt/jira/conf/server.xml /opt/jira/conf/server-backup.xml
+curl -Lks https://downloads.atlassian.com/software/confluence/downloads/atlassian-confluence-${CONFLUENCE_VERSION}.tar.gz -o /root/confluence.tar.gz
+/usr/sbin/useradd --create-home --home-dir /opt/confluence --groups atlassian --shell /bin/bash confluence
+tar zxf /root/confluence.tar.gz --strip=1 -C /opt/confluence
+rm /root/confluence.tar.gz
+chown -R confluence:confluence /opt/atlassian-home
+echo "confluence.home = /opt/atlassian-home" > /opt/confluence/confluence/WEB-INF/classes/confluence-init.properties
+chown -R confluence:confluence /opt/confluence
+mv /opt/confluence/conf/server.xml /opt/confluence/conf/server-backup.xml

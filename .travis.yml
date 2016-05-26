@@ -9,6 +9,8 @@ env:
     port: 8080
   - app: crowd
     port: 8095
+  - app: confluence
+    port: 8090
 
 services:
   - docker
@@ -30,6 +32,6 @@ script:
 
 after_script:
   # stop everything
-  - docker ps | awk '{print $1}' | while read w; do docker stop $w; done
+  - docker ps | grep -v CONTAINER | awk '{print $1}' | while read w; do docker stop $w; done
   # remove dead containers
   - docker ps -a | grep Exited | awk '{print $1}' | while read w; do docker rm $w; done
