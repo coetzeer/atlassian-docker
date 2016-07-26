@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ex
 
-curl -Lks https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-software-jira-${JIRA_VERSION}.tar.gz -o /root/jira.tar.gz
+curl -Lks https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-software-${JIRA_VERSION}.tar.gz -o /root/jira.tar.gz
 /usr/sbin/useradd --create-home --home-dir /opt/jira --groups atlassian --shell /bin/bash jira
 
 
